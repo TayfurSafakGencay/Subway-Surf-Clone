@@ -6,9 +6,19 @@ namespace Runtime.Contexts.Main.Model
 {
   public interface IMainModel
   {
+    bool GameStarted { get; set; }
+    
+    void StartGame();
+    
+    bool GameEnded { get; set; }
+    
+    bool RecordBroken { get; set; }
+
     GroundVo GroundVo { get; set; }
 
-    List<ObstacleVo> ObstaclePool { get; set; }
+    Dictionary<int, ObstacleVo> ObstaclePool { get; set; }
+    
+    List<GameObject> CoinPool { get; set; }
 
     Vector3 GetNewPosition();
 
@@ -16,6 +26,24 @@ namespace Runtime.Contexts.Main.Model
 
     void AddObstacleToPool(ObstacleVo obstacleVo);
 
-    List<ObstacleVo> GetObstacleFromPool(int piece);
+    void AddObstacleListToPool(List<ObstacleVo> obstacleList);
+
+    Dictionary<int, ObstacleVo> GetObstacleFromPool(int piece);
+
+    void AddCoins(List<GameObject> coins);
+
+    List<GameObject> GetCoins(int count);
+    
+    void SetScore(int newScore);
+    
+    int GetScore();
+
+    void SetSpeed(float newSpeed);
+
+    float GetSpeed();
+
+    void ObstacleCollision();
+
+    int GetHealth();
   }
 }

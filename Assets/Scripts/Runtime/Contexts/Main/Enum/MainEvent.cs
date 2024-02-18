@@ -1,9 +1,25 @@
 ﻿namespace Runtime.Contexts.Main.Enum
 {
-  public enum MainEventKey
+  public enum MainEvent
   {
     PlayerCreated,
+    
     GroundInitialObstacles,
-    SetInitialObstacles
+    SetInitialObstacles,
+    GroundInitialCoins,
+    SetInitialCoins,
+    
+    ConflictObstacles,
+    
+    SetObstacleParentAsPool,
+    SetObstacleListParentAsPool,
+    
+    CollectCoin,
+    SendCoinToPool,
+    AddCoinsToPool,
+    
+    GetDamage,
+    GameEnded,
+    GameStarted,
   }
 }

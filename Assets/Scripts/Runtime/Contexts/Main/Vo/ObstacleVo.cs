@@ -8,5 +8,7 @@ namespace Runtime.Contexts.Main.Vo
     public GameObject Object;
 
     public ObstacleKey Key;
+
+    public int Id;
   }
 }

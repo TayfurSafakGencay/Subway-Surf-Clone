@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Runtime.Contexts.Main.Enum;
 using Runtime.Contexts.Main.Model;
-using Runtime.Contexts.Main.View.Obstacle;
+using Runtime.Contexts.Main.View.Obstacle.Obstacle;
 using Runtime.Contexts.Main.Vo;
 using strange.extensions.dispatcher.eventdispatcher.api;
 using strange.extensions.mediation.impl;
 using UnityEngine;
 
-namespace Runtime.Contexts.Main.View.ObstacleCreator
+namespace Runtime.Contexts.Main.View.Obstacle.ObstacleCreator
 {
   public class ObstacleCreatorMediator : EventMediator
   {
@@ -75,9 +75,6 @@ namespace Runtime.Contexts.Main.View.ObstacleCreator
     {
       for (int i = 0; i < mainModel.GroundVo.GroundCount; i++)
       {
-        if (i == 0)
-          continue;
-
         dispatcher.Dispatch(MainEvent.GroundInitialObstacles, i);
       }
     }

@@ -1,8 +1,6 @@
 ﻿using Runtime.Contexts.Main.Enum;
 using Runtime.Contexts.Main.Model;
 using Runtime.Contexts.Main.View.Ground;
-using Runtime.Contexts.Main.View.ObstacleCreator;
-using Runtime.Contexts.Main.View.PlayerMovement;
 using Runtime.Contexts.Main.Vo;
 using strange.extensions.mediation.impl;
 using UnityEngine;
@@ -27,14 +25,14 @@ namespace Runtime.Contexts.Main.View.GameManager
     {
       GroundVo groundVo = new()
       {
-        GroundCount = view.GroundCount,
-        GroundLength = view.GroundLenght,
-        GroundWidth = view.GroundWidth
+        GroundCount = 2,
+        GroundLength = 200,
+        GroundWidth = 9
       };
       
       mainModel.SetGroundVo(groundVo);
       
-      for (int i = 0; i < view.GroundCount; i++)
+      for (int i = 0; i < 4; i++)
       {
         int localI = i;
         
@@ -46,17 +44,20 @@ namespace Runtime.Contexts.Main.View.GameManager
             GroundView groundView = instantiatedObject.GetComponent<GroundView>();
             groundView.Init(groundVo, localI);
 
-            if (localI == view.GroundCount - 1)
-              dispatcher.Dispatch(MainEventKey.SetInitialObstacles);
+            if (localI != 4 - 1) return;
+            dispatcher.Dispatch(MainEvent.SetInitialObstacles);
+            dispatcher.Dispatch(MainEvent.SetInitialCoins);
           }
         };
       }
 
-      Addressables.InstantiateAsync(GameObjectKey.Player).Completed += (handle) =>
+      Addressables.InstantiateAsync(GameObjectKey.Player, transform.parent).Completed += (handle) =>
       {
         if (handle.Status != AsyncOperationStatus.Succeeded) return;
         GameObject instantiatedObject = handle.Result;
-        dispatcher.Dispatch(MainEventKey.PlayerCreated, instantiatedObject);
+        instantiatedObject.transform.position = new Vector3(instantiatedObject.transform.position.x,
+          0.5f, instantiatedObject.transform.position.z);
+        dispatcher.Dispatch(MainEvent.PlayerCreated, instantiatedObject);
       };
     }
 

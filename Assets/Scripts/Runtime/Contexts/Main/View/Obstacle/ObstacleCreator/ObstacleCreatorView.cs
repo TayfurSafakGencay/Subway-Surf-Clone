@@ -3,7 +3,7 @@ using Runtime.Contexts.Main.Vo;
 using strange.extensions.mediation.impl;
 using UnityEngine;
 
-namespace Runtime.Contexts.Main.View.ObstacleCreator
+namespace Runtime.Contexts.Main.View.Obstacle.ObstacleCreator
 {
   public class ObstacleCreatorView : EventView
   {

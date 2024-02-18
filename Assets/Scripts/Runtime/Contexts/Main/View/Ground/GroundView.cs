@@ -7,19 +7,21 @@ namespace Runtime.Contexts.Main.View.Ground
 {
   public class GroundView : EventView
   {
-    public GameObject GroundObject;
-
     public Transform ObstacleContainer;
+
+    public Transform CoinContainer;
 
     [HideInInspector]
     public int Id;
 
-    public List<ObstacleVo> Obstacles;
+    public Dictionary<int, ObstacleVo> Obstacles = new();
+
+    [HideInInspector]
+    public List<GameObject> Coins;
 
     public void Init(GroundVo vo, int id)
     {
-      GroundObject.transform.localScale = new Vector3(vo.GroundLength, 1, vo.GroundWidth);
-      transform.position = new Vector3(id * vo.GroundLength, 0, 0);
+      transform.position = new Vector3(0, 0, id * vo.GroundLength);
       Id = id;
     }
 

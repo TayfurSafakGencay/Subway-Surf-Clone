@@ -12,7 +12,7 @@ namespace Runtime.Contexts.Main.View.CameraFollow
 
     public override void OnRegister()
     {
-      dispatcher.AddListener(MainEventKey.PlayerCreated, OnPlayerCreated);
+      dispatcher.AddListener(MainEvent.PlayerCreated, OnPlayerCreated);
     }
     
     private void Update()
@@ -21,7 +21,7 @@ namespace Runtime.Contexts.Main.View.CameraFollow
         return;
       
       Vector3 targetPosition = view.Player.position + view.OffSet;
-      targetPosition.z = 0;
+      // targetPosition.x = 0;
       transform.position = targetPosition;
     }
 
@@ -35,7 +35,7 @@ namespace Runtime.Contexts.Main.View.CameraFollow
     }
     public override void OnRemove()
     {
-      dispatcher.RemoveListener(MainEventKey.PlayerCreated, OnPlayerCreated);
+      dispatcher.RemoveListener(MainEvent.PlayerCreated, OnPlayerCreated);
     }
   }
 }
