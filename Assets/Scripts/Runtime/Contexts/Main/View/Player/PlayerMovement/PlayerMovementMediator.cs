@@ -1,8 +1,7 @@
-﻿using System;
-using strange.extensions.mediation.impl;
+﻿using strange.extensions.mediation.impl;
 using UnityEngine;
 
-namespace Runtime.Contexts.Main.View.PlayerMovement
+namespace Runtime.Contexts.Main.Player.PlayerMovement
 {
   public class PlayerMovementMediator : EventMediator
   {

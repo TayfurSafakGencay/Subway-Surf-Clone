@@ -1,7 +1,7 @@
 ﻿using strange.extensions.mediation.impl;
 using UnityEngine;
 
-namespace Runtime.Contexts.Main.View.PlayerMovement
+namespace Runtime.Contexts.Main.Player.PlayerMovement
 {
   public class PlayerMovementView : EventView
   {
@@ -20,11 +20,5 @@ namespace Runtime.Contexts.Main.View.PlayerMovement
 
     [HideInInspector]
     public  string Horizontal = "Horizontal";
-
-    [HideInInspector]
-    public bool MoveLeft = true;
-
-    [HideInInspector]
-    public bool MoveRight = true;
   }
 }
