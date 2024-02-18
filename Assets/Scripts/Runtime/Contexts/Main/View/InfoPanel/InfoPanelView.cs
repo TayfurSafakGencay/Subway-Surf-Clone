@@ -57,11 +57,19 @@ namespace Runtime.Contexts.Main.View.InfoPanel
       dispatcher.Dispatch(InfoPanelEvent.MuteMusic);
     }
 
+    public void OnExitGame()
+    {
+      dispatcher.Dispatch(InfoPanelEvent.Exit);
+    }
+
+    public void OnClearData()
+    {
+      dispatcher.Dispatch(InfoPanelEvent.ClearData);
+
+    }
+
     public void OnCoinCollectedAnimations()
     {
-      // ScoreText.rectTransform.DOScale(1.2f, 0.2f).SetLoops(-1, LoopType.Yoyo);
-      // ScoreText.rectTransform.DOScale(1.2f, 0.2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
-
       Vector3 originalScale = transform.localScale;
       
       ScoreText.transform.DOScale(originalScale * 1.15f, 0.1f)
@@ -69,7 +77,11 @@ namespace Runtime.Contexts.Main.View.InfoPanel
         {
           ScoreText.transform.DOScale(originalScale, 0.1f);
         });
+    }
 
+    protected override void Awake()
+    {
+      DOTween.SetTweensCapacity(1250, 50);
     }
   }
 }

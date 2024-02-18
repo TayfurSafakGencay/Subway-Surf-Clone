@@ -12,6 +12,8 @@ namespace Runtime.Contexts.Main.View.InfoPanel
     PlayAgain,
     StartGame,
     MuteMusic,
+    Exit,
+    ClearData
   }
 
   public class InfoPanelMediator : EventMediator
@@ -27,6 +29,8 @@ namespace Runtime.Contexts.Main.View.InfoPanel
       view.dispatcher.AddListener(InfoPanelEvent.PlayAgain, OnPlayAgain);
       view.dispatcher.AddListener(InfoPanelEvent.StartGame, OnStartGame);
       view.dispatcher.AddListener(InfoPanelEvent.MuteMusic, OnMuteMusic);
+      view.dispatcher.AddListener(InfoPanelEvent.Exit, OnExitGame);
+      view.dispatcher.AddListener(InfoPanelEvent.ClearData, OnClearData);
 
       dispatcher.AddListener(MainEvent.GetDamage, OnGetDamage);
       dispatcher.AddListener(MainEvent.GameEnded, OnGameEnded);
@@ -51,11 +55,11 @@ namespace Runtime.Contexts.Main.View.InfoPanel
       view.SpeedText.text = "Speed: <b>" + mainModel.GetSpeed().ToString("F") + "</b>";
 
       if (mainModel.GameStarted) return;
+
+      if(Input.GetKeyDown(KeyCode.Mouse0))
+        return;
       
-      bool start = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) ||
-                   Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) ||
-                   Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) ||
-                   Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+      bool start = Input.anyKeyDown;
 
       if (start)
         OnStartGame();
@@ -135,12 +139,29 @@ namespace Runtime.Contexts.Main.View.InfoPanel
 
       view.MusicButtonText.text = view.IsMusicMuted ? "Unmute Music" : "Mute Music";
     }
+    
+    public void OnClearData()
+    {
+      PlayerPrefs.DeleteAll();
+      
+      view.HighestScoreTextForStartPanel.text = "Highest Score: <b>" + PlayerPrefs.GetInt("Highest Score") + "</b>";
+    }
+
+    private void OnExitGame()
+    {
+#if UNITY_EDITOR
+      UnityEditor.EditorApplication.isPlaying = false;
+#endif
+      Application.Quit();
+    }
 
     public override void OnRemove()
     {
       view.dispatcher.RemoveListener(InfoPanelEvent.PlayAgain, OnPlayAgain);
       view.dispatcher.RemoveListener(InfoPanelEvent.StartGame, OnStartGame);
       view.dispatcher.RemoveListener(InfoPanelEvent.MuteMusic, OnMuteMusic);
+      view.dispatcher.RemoveListener(InfoPanelEvent.Exit, OnExitGame);
+      view.dispatcher.RemoveListener(InfoPanelEvent.ClearData, OnClearData);
 
       dispatcher.RemoveListener(MainEvent.GetDamage, OnGetDamage);
       dispatcher.RemoveListener(MainEvent.GameEnded, OnGameEnded);

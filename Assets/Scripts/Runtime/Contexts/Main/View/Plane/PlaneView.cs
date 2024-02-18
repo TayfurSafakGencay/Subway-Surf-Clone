@@ -19,5 +19,10 @@ namespace Runtime.Contexts.Main.View.Plane
         .SetLoops(-1, LoopType.Restart)
         .SetEase(Ease.Linear);
     }
+
+    protected override void OnDestroy()
+    {
+      transform.DOKill();
+    }
   }
 }
