@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - GroundEndPoint
+  - Obstacle
+  - ObstacleSelector
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -15,7 +18,7 @@ TagManager:
   - Player
   - GroundEndPoint
   - Ground
-  - 
+  - ObstacleSelector
   - 
   - 
   - 
